@@ -14,20 +14,19 @@ export default function Button({
     return (
         <Pressable 
             onPress={onPress}
-            style={arguments => {
-                return arguments.pressed 
-                ?
-                [
-                    ...styles.base,
-                    {
-                        opacity: .5,
-                        backgroundColor,
-                        width
-                    },
-                    containerStyle
-                ]
-                :
-                [
+            style={args => {
+                if (args.pressed) {
+                    return [
+                        styles.base,
+                        {
+                            opacity: .5,
+                            backgroundColor,
+                            width
+                        },
+                        containerStyle
+                    ];
+                };
+                return [
                     styles.base,
                     {
                         opacity: 1,
