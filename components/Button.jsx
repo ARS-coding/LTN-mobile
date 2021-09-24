@@ -14,8 +14,8 @@ export default function Button({
     return (
         <Pressable 
             onPress={onPress}
-            style={args => {
-                if (args.pressed) {
+            style={({ pressed: isPressed }) => {
+                if (isPressed) {
                     return [
                         styles.base,
                         {
