@@ -11,7 +11,8 @@ function InputField({
     placeholder = "",
     placeholderTextColor = "#444",
     inputStyle,
-    containerStyle
+    containerStyle,
+    ...rest
 }) {
     return (
         <View style={[styles.container, containerStyle]}>
@@ -28,7 +29,8 @@ function InputField({
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
                 style={[styles.input, inputStyle]}
-            />
+                {...rest}
+           />
             {rightIcon && 
                 <TouchableOpacity style={[styles.rightIconTouchable]}>
                     <MaterialCommunityIcons
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 4,
         flexDirection: "row",
-        padding: 12,
+        paddingVertical: 12,
         borderWidth: 2
     },
     input: {
