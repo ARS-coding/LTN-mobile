@@ -40,7 +40,7 @@ export default function LoginScreen() {
                 containerStyle={{ marginVertical: 20, backgroundColor: "white" }}
                 inputStyle={{ fontSize: 14 }}
                 leftIcon="email"
-                placeholder="Email..."
+                placeholder="Email"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 autoFocus={true}
@@ -52,7 +52,7 @@ export default function LoginScreen() {
                 inputStyle={{ fontSize: 14 }}
                 leftIcon='lock'
                 rightIcon={rightIcon}
-                placeholder="Password..."
+                placeholder="Password"
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry={passwordVisibility}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#e93b81",
         paddingHorizontal: 12,
-        paddingTop: 50,
+        paddingTop: 40,
     },
     title: {
         alignSelf: "center",
