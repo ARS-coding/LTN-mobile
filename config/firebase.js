@@ -16,7 +16,11 @@ const firebaseConfig = {
     measurementId: Constants.manifest.extra.measurementId
 };
 
-firebaseApp.initializeApp(firebaseConfig);
+if (firebaseApp.apps.length === 0) {
+    firebaseApp.initializeApp(firebaseConfig);
+} else {
+    firebaseApp.app();
+}
 
 export const auth = new firebaseApp.auth();
 export const firestore = new firebaseApp.firestore();
