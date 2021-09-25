@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         flexDirection: "row",
         paddingVertical: 12,
-        borderWidth: 2
+        borderWidth: 2,
     },
     input: {
         flex: 1,
