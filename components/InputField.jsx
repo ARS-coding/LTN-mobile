@@ -8,7 +8,7 @@ function InputField({
     leftIcon = null,
     rightIcon = null,
     iconColor = "#000",
-    placeholder = "black",
+    placeholder = "",
     placeholderTextColor = "#444",
     inputStyle,
     containerStyle
@@ -29,8 +29,8 @@ function InputField({
                 placeholderTextColor={placeholderTextColor}
                 style={[styles.input, inputStyle]}
             />
-            <TouchableOpacity style={[styles.rightIconTouchable]}>
-                {rightIcon && 
+            {rightIcon && 
+                <TouchableOpacity style={[styles.rightIconTouchable]}>
                     <MaterialCommunityIcons
                         name={rightIcon}
                         size={20}
@@ -39,8 +39,8 @@ function InputField({
                             { color: iconColor }
                         ]}
                     />
-                }
-            </TouchableOpacity>
+                </TouchableOpacity>
+            }
         </View>
     )
 }
@@ -52,25 +52,20 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         flexDirection: "row",
         padding: 12,
-        backgroundColor: "red",
-        width: "90%"
+        borderWidth: 2
     },
     input: {
         flex: 1,
         fontSize: 18,
-        backgroundColor: "pink",
     },
     leftIcon: {
-        marginLeft: 10,
-        width: "10%",
-        height: "100%"
+        marginRight: 10,
     },
     rightIconTouchable: {
         width: "10%"
     },
     rightIcon: {
-        marginRight: 10,
-        width: "100%",
-        height: 50,
+        marginLeft: 10,
+        alignSelf: "center",
     }
 })
