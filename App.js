@@ -2,14 +2,18 @@ import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, NativeModules } from 'react-native';
 
-import InputField from "./components/InputField";
+import HomeScreen from './screens/HomeScreen';
+
+const { StatusBarManager } = NativeModules;
+const statusBarHeight = (Platform.OS === "android" && StatusBarManager.HEIGHT) || (Platform.OS === "ios" && StatusBarManager.getHeight(height => height));
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar />
+      <StatusBar style="dark-content" />
+      <HomeScreen />
     </View>
   );
 }
@@ -17,8 +21,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: statusBarHeight
   },
 });
