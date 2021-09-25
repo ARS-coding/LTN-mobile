@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { View, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function InputField({
-    leftIcon = null, // pass the imported image or svg, don't pass path
-    rightIcon = null, // pass the imported image or svg, don't pass path
+    leftIcon = null,
+    rightIcon = null,
     iconColor = "#000",
     placeholder = "black",
     placeholderTextColor = "#444",
@@ -14,11 +16,11 @@ function InputField({
     return (
         <View style={[styles.container, containerStyle]}>
             {leftIcon && 
-                <Image 
-                    source={leftIcon}
+                <MaterialCommunityIcons
+                    size={20}
                     style={[
                         styles.leftIcon,
-                        // { color: iconColor } TODO: apply ant design and it will stop giving errors
+                        { color: iconColor }
                     ]}
                 />
             }
@@ -29,11 +31,12 @@ function InputField({
             />
             <TouchableOpacity style={[styles.rightIconTouchable]}>
                 {rightIcon && 
-                    <Image
-                        source={rightIcon}
+                    <MaterialCommunityIcons
+                        name={rightIcon}
+                        size={20}
                         style={[
                             styles.rightIcon,
-                            // { color: iconColor } TODO: apply ant design and it will stop giving errors
+                            { color: iconColor }
                         ]}
                     />
                 }
