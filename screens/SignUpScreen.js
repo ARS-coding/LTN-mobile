@@ -5,7 +5,7 @@ import { InputField, Button, ErrorMessage } from '../components';
 
 import { auth } from "../config/firebase";
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation }) {
     const initialFormData = {
         firstName: "",
         lastName: "",
@@ -102,7 +102,8 @@ export default function SignUpScreen() {
                     onPress={handleSignUp}    
                 />
                 <RNButton 
-                    title="Go to Login" // TODO: add onpress of navigation.navigate('Signup') 
+                    title="Go to Login" 
+                    onPress={() => navigation.navigate('Login')}
                 />
             </View>
         </View>
