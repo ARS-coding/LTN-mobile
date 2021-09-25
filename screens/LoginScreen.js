@@ -6,11 +6,11 @@ import { Button, InputField, ErrorMessage } from "../components"
 import { auth } from "../config/firebase";
 
 export default function LoginScreen() {
-
-    const [formData, setFormdata] = useState({
+    const initialFormData = {
         email: "",
-        password: ""
-    });
+        password: "",
+    };
+    const [formData, setFormdata] = useState(initialFormData);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
     const [rightIcon, setRightIcon] = useState("eye");
     const [loginError, setLoginError] = useState("");
@@ -18,6 +18,7 @@ export default function LoginScreen() {
     function handlePasswordVisibility() {
         if (rightIcon === "eye") {
             setRightIcon("eye-off");
+            setFormdata(initialFormData);
         } else if (rightIcon === "eye-off") {
             setRightIcon("eye");
         }
@@ -44,8 +45,9 @@ export default function LoginScreen() {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 autoFocus={true}
-                value={formData.email}
+
                 onChangeText={(text) => setFormdata({ ...formData, email: text })}
+                value={formData.email}
             />
             <InputField 
                 containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
@@ -56,10 +58,11 @@ export default function LoginScreen() {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry={passwordVisibility}
-                onChangeText={(text) => setFormdata({ ...formData, password: text })}
-                value={formData.password}
                 rightIconOnPress={handlePasswordVisibility}
                 handlePasswordVisibility={passwordVisibility}
+
+                onChangeText={(text) => setFormdata({ ...formData, password: text })}
+                value={formData.password}
             />
             {(loginError !== "") && <ErrorMessage
                 error={loginError}
@@ -71,7 +74,7 @@ export default function LoginScreen() {
                 containerStyle={{marginBottom: 24}}
             />
             <RNButton 
-                title="Go to Signup" // TODO: add onpress of navigation.navigate('Signup')
+                title="Go to Sign Up" // TODO: add onpress of navigation.navigate('Signup')
             /> 
         </View>
     )
