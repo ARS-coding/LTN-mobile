@@ -18,7 +18,7 @@ function InputField({
                     source={leftIcon}
                     style={[
                         styles.leftIcon,
-                        { color: iconColor }
+                        // { color: iconColor } TODO: apply ant design and it will stop giving errors
                     ]}
                 />
             }
@@ -33,7 +33,7 @@ function InputField({
                         source={rightIcon}
                         style={[
                             styles.rightIcon,
-                            { color: iconColor }
+                            // { color: iconColor } TODO: apply ant design and it will stop giving errors
                         ]}
                     />
                 }
