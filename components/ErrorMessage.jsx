@@ -2,11 +2,26 @@ import React from 'react'
 
 import { Text, StyleSheet } from "react-native";
 
-export default function ErrorMessage({ error, visible }) {
+import { AntDesign } from "@expo/vector-icons";
+
+export default function ErrorMessage({
+    error,
+    errorColor,
+    visible,
+    warningIconSize,
+    warningIconColor
+}) {
     return (
         error && visible 
         ? 
-        <Text style={styles.errorText}>⚠️ {error}</Text>
+        <Text style={[styles.errorText, { color: errorColor }]}>
+            <AntDesign
+                name="warning"
+                color={warningIconColor}
+                size={warningIconSize}
+            />
+            {error}
+        </Text>
         :
         null
     );
@@ -14,7 +29,6 @@ export default function ErrorMessage({ error, visible }) {
 
 const styles = StyleSheet.create({
     errorText: {
-        color: '#fdca40',
         fontSize: 20,
         marginBottom: 10,
         fontWeight: "600"
