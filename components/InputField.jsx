@@ -12,12 +12,14 @@ function InputField({
     placeholderTextColor = "#444",
     inputStyle,
     containerStyle,
+    rightIconOnPress,
     ...rest
 }) {
     return (
         <View style={[styles.container, containerStyle]}>
             {leftIcon && 
                 <MaterialCommunityIcons
+                    name={leftIcon}
                     size={20}
                     style={[
                         styles.leftIcon,
@@ -31,15 +33,13 @@ function InputField({
                 style={[styles.input, inputStyle]}
                 {...rest}
            />
-            {rightIcon && 
-                <TouchableOpacity style={[styles.rightIconTouchable]}>
+            {rightIcon &&
+                <TouchableOpacity style={styles.rightIconTouchable}>
                     <MaterialCommunityIcons
                         name={rightIcon}
                         size={20}
-                        style={[
-                            styles.rightIcon,
-                            { color: iconColor }
-                        ]}
+                        style={{ color: iconColor }}
+                        onPress={rightIconOnPress}
                     />
                 </TouchableOpacity>
             }
@@ -61,13 +61,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     leftIcon: {
-        marginRight: 10,
+        marginLeft: 15,
+        marginRight: 12,
+        alignSelf: "center"
     },
     rightIconTouchable: {
-        width: "10%"
+        marginRight: 15,
+        alignSelf: "center"
     },
-    rightIcon: {
-        marginLeft: 10,
-        alignSelf: "center",
-    }
 })
