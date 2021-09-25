@@ -1,36 +1,46 @@
 import React from 'react'
 
-import { Text, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
 export default function ErrorMessage({
     error,
-    errorColor,
+    errorColor = "white",
     visible,
-    warningIconSize,
-    warningIconColor
+    warningIconSize = 26,
+    warningIconColor = "white"
 }) {
     return (
         error && visible 
         ? 
-        <Text style={[styles.errorText, { color: errorColor }]}>
-            <AntDesign
-                name="warning"
-                color={warningIconColor}
-                size={warningIconSize}
-            />
-            {error}
-        </Text>
+        <View style={[styles.container]}>
+            <View style={{ alignSelf: "center" }}>
+                <AntDesign
+                    name="warning"
+                    color={warningIconColor}
+                    size={warningIconSize}
+                    style={styles.warningIcon, { marginHorizontal: 15 }}
+                />
+            </View>
+            <Text style={[styles.warningText, { color: errorColor }]}>{error}</Text>
+        </View>
         :
         null
     );
 };
 
 const styles = StyleSheet.create({
-    errorText: {
-        fontSize: 20,
+    container: {
         marginBottom: 10,
+        flexDirection: "row"
+    },
+    warningIcon: {
+        marginRight: 15,
+        
+    },
+    warningText: {
+        fontSize: 20,
         fontWeight: "600"
     }
 });
