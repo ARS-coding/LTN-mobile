@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+
+import Firebase from '../config/firebase';
 
 export default function HomeScreen() {
     return (
@@ -9,3 +11,7 @@ export default function HomeScreen() {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    
+})
