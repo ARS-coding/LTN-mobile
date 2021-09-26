@@ -10,7 +10,7 @@ const { Navigator, Screen } = Stack;
 export default function HomeStack() {
     return (
         <Navigator headerMode="none">
-            <Stack name="Home" component={HomeScreen} />
+            <Screen name="Home" component={HomeScreen} />
         </Navigator>
     )
 }
