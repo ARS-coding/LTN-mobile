@@ -1,19 +1,30 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+
+import { LogBox } from 'react-native';
+
+import React, { useEffect } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 
-import { StyleSheet, View, NativeModules } from 'react-native';
+import { StyleSheet, View, NativeModules, Platform } from 'react-native';
 
-import HomeScreen from './screens/HomeScreen';
+import Routes from './navigation';
+import { enableScreens } from 'react-native-screens';
 
 const { StatusBarManager } = NativeModules;
 const statusBarHeight = (Platform.OS === "android" && StatusBarManager.HEIGHT) || (Platform.OS === "ios" && StatusBarManager.getHeight(height => height));
 
 export default function App() {
+  LogBox.ignoreLogs(['Setting a timer']);
+  
+  useEffect(() => {
+    enableScreens();
+  }, [])
+
   return (
     <View style={styles.container}>
-      <StatusBar style="dark-content" />
-      <HomeScreen />
+      <StatusBar />
+      <Routes />  
     </View>
   );
 }
@@ -21,6 +32,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: statusBarHeight
+    marginTop: statusBarHeight,
   },
 });
