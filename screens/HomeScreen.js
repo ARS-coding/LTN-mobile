@@ -6,13 +6,12 @@ import { IconButton } from '../components';
 import { AuthenticatedUserContext } from "../navigation/AuthenticatedUserProvider";
 import { auth } from "../config/firebase";
 
-export default function HomeScreen() { // IF THEY ARE GONNA SEE THIS PAGE JUST WHEN THEY ARE LOGGED IN, THERE'S NO NEED FOR CONDITIONAL RENDERING
-    
+export default function HomeScreen() {    
     const { user } = useContext(AuthenticatedUserContext);
 
     async function handleSignOut() {
         try {
-            auth.signOut();
+           await auth.signOut();
         } catch(error) {
             console.error("An error has occured while trying to sign out:", error);
         }
