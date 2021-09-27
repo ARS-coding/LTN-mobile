@@ -9,7 +9,7 @@ const { Navigator, Screen } = Stack;
 
 export default function HomeStack() {
     return (
-        <Navigator headerMode="none">
+        <Navigator screenOptions={{headerShown: false}}>
             <Screen name="Home" component={HomeScreen} />
         </Navigator>
     )
