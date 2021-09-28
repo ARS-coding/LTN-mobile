@@ -12,7 +12,7 @@ import HomeStack from './HomeStack';
 
 export default function RootNavigator() {
     const [isLoading, setIsloading] = useState(true);
-    const { user, setUser } =useContext(AuthenticatedUserContext);
+    const { user, setUser } = useContext(AuthenticatedUserContext);
 
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
