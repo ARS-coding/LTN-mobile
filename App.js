@@ -1,12 +1,10 @@
 import 'react-native-gesture-handler';
 
-import { LogBox } from 'react-native';
-
 import React, { useEffect } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 
-import { StyleSheet, View, NativeModules, Platform } from 'react-native';
+import { StyleSheet, View, NativeModules, Platform, LogBox } from 'react-native';
 
 import Routes from './navigation';
 import { enableScreens } from 'react-native-screens';
