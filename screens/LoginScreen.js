@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 
-import { StyleSheet, View, Text, Button as RNButton } from "react-native";
+import {
+    StyleSheet,
+    View,
+    Text,
+    Button as RNButton,
+    TouchableWithoutFeedback,
+    Keyboard
+} from "react-native";
 import { Button, InputField, ErrorMessage } from "../components"
 
 import { auth } from "../config/firebase";
@@ -35,49 +42,51 @@ export default function LoginScreen({ navigation }) {
 
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
-            <InputField 
-                containerStyle={{ marginVertical: 20, backgroundColor: "white" }}
-                inputStyle={{ fontSize: 14 }}
-                leftIcon="email"
-                placeholder="Email"
-                autoCapitalize="none"
-                keyboardType="email-address"
-                autoFocus={true}
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Login</Text>
+                <InputField 
+                    containerStyle={{ marginVertical: 20, backgroundColor: "white" }}
+                    inputStyle={{ fontSize: 14 }}
+                    leftIcon="email"
+                    placeholder="Email"
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    autoFocus={true}
 
-                onChangeText={(text) => setFormdata({ ...formData, email: text })}
-                value={formData.email}
-            />
-            <InputField 
-                containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
-                inputStyle={{ fontSize: 14 }}
-                leftIcon='lock'
-                rightIcon={rightIcon}
-                placeholder="Password"
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={passwordVisibility}
-                rightIconOnPress={handlePasswordVisibility}
-                handlePasswordVisibility={passwordVisibility}
+                    onChangeText={(text) => setFormdata({ ...formData, email: text })}
+                    value={formData.email}
+                />
+                <InputField 
+                    containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
+                    inputStyle={{ fontSize: 14 }}
+                    leftIcon='lock'
+                    rightIcon={rightIcon}
+                    placeholder="Password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={passwordVisibility}
+                    rightIconOnPress={handlePasswordVisibility}
+                    handlePasswordVisibility={passwordVisibility}
 
-                onChangeText={(text) => setFormdata({ ...formData, password: text })}
-                value={formData.password}
-            />
-            {(loginError !== "") && <ErrorMessage
-                error={loginError}
-                visible={true}
-            />}
-            <Button 
-                title="Login"
-                onPress={() => { setLoginError(""); onLogin()}}
-                containerStyle={{marginBottom: 24}}
-            />
-            <RNButton 
-                title="Go to Sign Up"
-                onPress={() => navigation.navigate('SignUp')}
-            /> 
-        </View>
+                    onChangeText={(text) => setFormdata({ ...formData, password: text })}
+                    value={formData.password}
+                />
+                {(loginError !== "") && <ErrorMessage
+                    error={loginError}
+                    visible={true}
+                />}
+                <Button 
+                    title="Login"
+                    onPress={() => { setLoginError(""); onLogin()}}
+                    containerStyle={{marginBottom: 24}}
+                />
+                <RNButton 
+                    title="Go to Sign Up"
+                    onPress={() => navigation.navigate('SignUp')}
+                /> 
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
