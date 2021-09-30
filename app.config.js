@@ -2,8 +2,8 @@ import "dotenv/config";
 
 export default {
   "expo": {
-    "name": "mobile-todo-app",
-    "slug": "mobile-todo-app",
+    "name": "love-thy-neighbor",
+    "slug": "love-thy-neighbor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
