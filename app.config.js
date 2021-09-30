@@ -2,8 +2,8 @@ import "dotenv/config";
 
 export default {
   "expo": {
-    "name": "love-thy-neighbor",
-    "slug": "love-thy-neighbor",
+    "name": "LTN-mobile",
+    "slug": "LTN-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
