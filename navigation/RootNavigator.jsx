@@ -11,21 +11,19 @@ import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 
 export default function RootNavigator() {
-    const [isLoading, setIsloading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const { user, setUser } = useContext(AuthenticatedUserContext);
 
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
             try {
                 authenticatedUser ? setUser(authenticatedUser) : setUser(null);
-                setIsloading(false);
+                setIsLoading(false);
             } catch(error) {
                 console.error("An error occured on auth state change:" , error)
             }
         });
-
-        // unsubscribe from auth listener on unmount
-        return unsubscribeAuth;
+        return unsubscribeAuth; // unsubscribe from auth listener on unmount
     }, [])
 
     if (isLoading) {

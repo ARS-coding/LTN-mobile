@@ -30,7 +30,7 @@ export default function SignUpScreen({ navigation }) {
             icon: "eye-off",
             isVisible: true
         }
-    })
+    });
     const [signUpError, setSignUpError] = useState("");
 
     function handlePasswordVisibility(targetInput) {
