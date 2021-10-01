@@ -36,10 +36,12 @@ export default function SignUpScreen({ navigation }) {
     }
 
     async function handleSignUp() {
-        try {
-            await auth.createUserWithEmailAndPassword(formData.email, formData.password);
-        } catch(error) {
-            setSignUpError(error.message);
+        if(formData.firstName && formData.lastName) {
+            try {
+                await auth.createUserWithEmailAndPassword(formData.email, formData.password);
+            } catch(error) {
+                setSignUpError(error.message);
+            }
         }
     }
 
