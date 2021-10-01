@@ -79,7 +79,7 @@ export default function LoginScreen({ navigation }) {
                 <Button 
                     title="Login"
                     onPress={() => { setLoginError(""); onLogin()}}
-                    containerStyle={{marginBottom: 24}}
+                    containerStyle={{ marginBottom: 10 }}
                 />
                 <RNButton 
                     title="Go to Sign Up"
