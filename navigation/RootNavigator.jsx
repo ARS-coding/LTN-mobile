@@ -1,42 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 
-import { View, ActivityIndicator } from "react-native";
+import { connect } from 'react-redux'; 
 
 import { NavigationContainer } from '@react-navigation/native';
-
-import { auth } from "../config/firebase";
-import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 
 import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 
-export default function RootNavigator() {
-    const [isLoading, setIsLoading] = useState(true);
-    const { user, setUser } = useContext(AuthenticatedUserContext);
-
-    useEffect(() => {
-        const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
-            try {
-                authenticatedUser ? setUser(authenticatedUser) : setUser(null);
-                setIsLoading(false);
-            } catch(error) {
-                console.error("An error occured on auth state change:" , error)
-            }
-        });
-        return unsubscribeAuth; // unsubscribe from auth listener on unmount
-    }, [])
-
-    if (isLoading) {
-        return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <ActivityIndicator size='large' />
-            </View>
-        )
-    };
-
+function RootNavigator({ isSignedIn }) {
     return (
         <NavigationContainer>
-            {user ? <HomeStack /> : <AuthStack />}
+            {isSignedIn ? <HomeStack /> : <AuthStack />}
         </NavigationContainer>
     )
 }
+
+const mapStateToProps = state => ({ isSignedIn: state.isSignedIn });
+
+export default connect(mapStateToProps)(RootNavigator);
