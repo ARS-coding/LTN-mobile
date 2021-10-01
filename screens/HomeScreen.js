@@ -3,12 +3,11 @@ import React, { useContext } from 'react'
 import { StyleSheet, View, Text } from "react-native";
 import { IconButton } from '../components';
 
-import { AuthenticatedUserContext } from "../navigation/AuthenticatedUserProvider";
 import { auth } from "../config/firebase";
+import { connect } from 'react-redux';
 
-export default function HomeScreen() {    
-    const { user } = useContext(AuthenticatedUserContext);
-
+function HomeScreen({ user }) {
+    console.log(user)
     async function handleSignOut() {
         try {
            await auth.signOut();
@@ -58,3 +57,7 @@ const styles = StyleSheet.create({
         color: "white"
     }
 })
+
+const mapStateToProps = state => ({ user: state.user }); 
+
+export default connect(mapStateToProps)(HomeScreen);
