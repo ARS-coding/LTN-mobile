@@ -4,8 +4,7 @@ import "firebase/firestore";
 
 import Constants from "expo-constants";
 
-// Initialise firebase
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Initialise firebase for Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: Constants.manifest.extra.apiKey,
     authDomain: Constants.manifest.extra.authDomain,
