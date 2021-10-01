@@ -34,12 +34,11 @@ function InputField({
                 {...rest}
            />
             {rightIcon &&
-                <TouchableOpacity style={styles.rightIconTouchable}>
+                <TouchableOpacity style={styles.rightIconTouchable} onPress={rightIconOnPress}>
                     <MaterialCommunityIcons
                         name={rightIcon}
                         size={20}
                         style={{ color: iconColor }}
-                        onPress={rightIconOnPress}
                     />
                 </TouchableOpacity>
             }
