@@ -6,8 +6,7 @@ import { IconButton } from '../components';
 import { auth } from "../config/firebase";
 import { connect } from 'react-redux';
 
-function HomeScreen({ user }) {
-    console.log(user)
+function HomeScreen({ email, uid }) {
     async function handleSignOut() {
         try {
            await auth.signOut();
@@ -19,7 +18,7 @@ function HomeScreen({ user }) {
     return (
         <View style={styles.container}>
             <View style={styles.row}>
-                <Text style={styles.title}>Welcome, {user?.email}!</Text>
+                <Text style={styles.title}>Welcome, {email}!</Text>
                 <IconButton 
                     name="logout"
                     size={24}
@@ -28,7 +27,7 @@ function HomeScreen({ user }) {
                 />
             </View>
 
-            <Text style={styles.text}>Your UID is: {user?.uid}</Text>
+            <Text style={styles.text}>Your UID is: {uid}</Text>
         </View>
     )
 }
@@ -58,6 +57,6 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = state => ({ user: state.user }); 
+const mapStateToProps = ({ authCred: { email, uid } }) => ({ email, uid }); 
 
 export default connect(mapStateToProps)(HomeScreen);
