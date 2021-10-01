@@ -21,18 +21,24 @@ export default function SignUpScreen({ navigation }) {
     };
 
     const [formData, setFormData] = useState(initialFormData);
-    const [passwordVisibility, setPasswordVisibility] = useState(false);
-    const [rightIcon, setRightIcon] = useState("eye");
+    const [passwordInputs, setPasswordInputs] = useState({
+        passwordInput: {
+            icon: "eye-off",
+            isVisible: true
+        },
+        passwordConfirmationInput: {
+            icon: "eye-off",
+            isVisible: true
+        }
+    })
     const [signUpError, setSignUpError] = useState("");
 
-    function handlePasswordVisibility() {
-        if (rightIcon === "eye") {
-            setRightIcon("eye-off");
-            setFormdata(initialFormData);
-        } else if (rightIcon === "eye-off") {
-            setRightIcon("eye");
+    function handlePasswordVisibility(targetInput) {
+        if (passwordInputs[targetInput].icon === "eye") {
+            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye-off", isVisible: true } })
+        } else if (passwordInputs[targetInput].icon === "eye-off") {
+            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye", isVisible: false } })
         }
-        setPasswordVisibility(!passwordVisibility);
     }
 
     async function handleSignUp() {
@@ -90,14 +96,28 @@ export default function SignUpScreen({ navigation }) {
                         inputStyle={{ fontSize: 14 }}
                         placeholder="Password"
                         leftIcon="lock"
-                        rightIcon={rightIcon}
+                        rightIcon={passwordInputs.passwordInput.icon}
                         autoCapitalize="none"
                         autoCorrect={false}
-                        secureTextEntry={passwordVisibility}
-                        rightIconOnPress={handlePasswordVisibility}
+                        secureTextEntry={passwordInputs.passwordInput.isVisible}
+                        rightIconOnPress={() => handlePasswordVisibility("passwordInput")}
                         
                         onChangeText={(text) => setFormData({ ...formData, password: text })}
                         value={formData.password}
+                    />
+                    <InputField
+                        containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
+                        inputStyle={{ fontSize: 14 }}
+                        placeholder="Confirm password"
+                        leftIcon="lock"
+                        rightIcon={passwordInputs.passwordConfirmationInput.icon}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        secureTextEntry={passwordInputs.passwordConfirmationInput.isVisible}
+                        rightIconOnPress={() => handlePasswordVisibility("passwordConfirmationInput")}
+                        
+                        onChangeText={(text) => setFormData({ ...formData, passwordConfirmation: text })}
+                        value={formData.confirmationPassword}
                     />
                 </View>
                 {(signUpError !== "") && <ErrorMessage
