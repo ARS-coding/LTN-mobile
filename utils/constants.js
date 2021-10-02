@@ -129,4 +129,6 @@ const constants = {
   
 export const arrayOfActivityObjects = constants.activityList.map((activity, index) => ({ content: activity, id: index }));
 
+export const arrayOfDistrictObjects = constants.districtList.map((district, index) => ({ content: district, id: index }));
+
 export default constants;
