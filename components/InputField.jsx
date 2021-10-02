@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     leftIcon: {
-        marginLeft: 15,
-        marginRight: 12,
+        marginLeft: 8,
+        marginRight: 10,
         alignSelf: "center"
     },
     rightIconTouchable: {
