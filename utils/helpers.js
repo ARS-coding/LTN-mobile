@@ -1,8 +1,8 @@
 import { firestore } from "../config/firebase";
 
-import PPMaleSVG from "../images/Profile/PPMaleSVG.svg";
-import PPFemaleSVG from "../images/Profile/PPFemaleSVG.svg";
-import PPGenderless from "../images/Profile/PPGenderless.png";
+import PPMaleSVG from "../assets/PPMaleSVG.svg";
+import PPFemaleSVG from "../assets/PPFemaleSVG.svg";
+import PPGenderless from "../assets/PPGenderless.png";
 
 export function removeOneProp(object, propToBeRemoved) {
   const copyObj = { ...object };
