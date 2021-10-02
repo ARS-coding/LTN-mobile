@@ -9,7 +9,8 @@ import {
     Keyboard } from "react-native";
 import { InputField, Button, ErrorMessage } from '../components';
 
-import { auth } from "../config/firebase";
+import { auth, firestore } from "../config/firebase";
+import { setUserDocument, removeOneProp } from "../utils/helpers";
 
 export default function SignUpScreen({ navigation }) {
     const initialFormData = {
@@ -24,27 +25,29 @@ export default function SignUpScreen({ navigation }) {
     const [passwordInputs, setPasswordInputs] = useState({
         passwordInput: {
             icon: "eye-off",
-            isVisible: true
+            isNotVisible: true
         },
         passwordConfirmationInput: {
             icon: "eye-off",
-            isVisible: true
+            isNotVisible: true
         }
     });
     const [signUpError, setSignUpError] = useState("");
 
     function handlePasswordVisibility(targetInput) {
         if (passwordInputs[targetInput].icon === "eye") {
-            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye-off", isVisible: true } })
+            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye-off", isNotVisible: true } })
         } else if (passwordInputs[targetInput].icon === "eye-off") {
-            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye", isVisible: false } })
+            setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye", isNotVisible: false } })
         }
     }
 
     async function handleSignUp() {
-        if(formData.firstName && formData.lastName) {
+        if(formData.firstName && formData.lastName && (formData.password === formData.passwordConfirmation)) {
             try {
-                await auth.createUserWithEmailAndPassword(formData.email, formData.password);
+                const { uid, additionalUserInfo: { isNewUser } } = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
+                setUserDocument(uid, removeOneProp(formData, "passwordConfirmation"));
+                setFormData(initialFormData);
             } catch(error) {
                 setSignUpError(error.message);
             }
@@ -99,7 +102,7 @@ export default function SignUpScreen({ navigation }) {
                         rightIcon={passwordInputs.passwordInput.icon}
                         autoCapitalize="none"
                         autoCorrect={false}
-                        secureTextEntry={passwordInputs.passwordInput.isVisible}
+                        secureTextEntry={passwordInputs.passwordInput.isNotVisible}
                         rightIconOnPress={() => handlePasswordVisibility("passwordInput")}
                         
                         onChangeText={(text) => setFormData({ ...formData, password: text })}
@@ -113,7 +116,7 @@ export default function SignUpScreen({ navigation }) {
                         rightIcon={passwordInputs.passwordConfirmationInput.icon}
                         autoCapitalize="none"
                         autoCorrect={false}
-                        secureTextEntry={passwordInputs.passwordConfirmationInput.isVisible}
+                        secureTextEntry={passwordInputs.passwordConfirmationInput.isNotVisible}
                         rightIconOnPress={() => handlePasswordVisibility("passwordConfirmationInput")}
                         
                         onChangeText={(text) => setFormData({ ...formData, passwordConfirmation: text })}
