@@ -9,7 +9,7 @@ function InputField({
     rightIcon = null,
     iconColor = "#000",
     placeholder = "",
-    placeholderTextColor = "#444",
+    placeholderTextColor = "#222",
     inputStyle,
     containerStyle,
     rightIconOnPress,
