@@ -12,8 +12,8 @@ const { Navigator, Screen } = Stack;
 export default function AuthStack() {
     return (
         <Navigator screenOptions={{headerShown: false}}>
-            <Screen name="SignUp" component={SignUpScreen} />
             <Screen name="Login" component={LoginScreen} />
+            <Screen name="SignUp" component={SignUpScreen} />
         </Navigator>
     );
 }
