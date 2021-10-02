@@ -12,16 +12,23 @@ import { InputField, Button, ErrorMessage } from '../components';
 import { auth, firestore } from "../config/firebase";
 import { setUserDocument, removeOneProp } from "../utils/helpers";
 
+import { arrayOfDistrictObjects } from "../utils/constants";
+import DropDownPicker from 'react-native-dropdown-picker';
+
 export default function SignUpScreen({ navigation }) {
     const initialFormData = {
         firstName: "",
         lastName: "",
+        district: "",
+        gender: "",
         email: "",
         password: "",
         passwordConfirmation: ""
     };
-
+    
     const [formData, setFormData] = useState(initialFormData);
+    const [isDistrictOpen, setIsDistrictOpen] = useState(false);
+    const [isGenderOpen, setIsGenderOpen] = useState(false);
     const [passwordInputs, setPasswordInputs] = useState({
         passwordInput: {
             icon: "eye-off",
@@ -33,7 +40,8 @@ export default function SignUpScreen({ navigation }) {
         }
     });
     const [signUpError, setSignUpError] = useState("");
-
+    console.log(formData)
+    
     function handlePasswordVisibility(targetInput) {
         if (passwordInputs[targetInput].icon === "eye") {
             setPasswordInputs({ ...passwordInputs, [targetInput]: { icon: "eye-off", isNotVisible: true } })
@@ -67,7 +75,7 @@ export default function SignUpScreen({ navigation }) {
                 <View style={{ marginTop: 30 }}>
                     <View style={{flexDirection: "row"}}>
                         <InputField
-                            containerStyle={{ flex: 1, marginBottom: 20, backgroundColor: "white" }}
+                            containerStyle={{ flex: 1, marginBottom: 12, backgroundColor: "white" }}
                             inputStyle={{ marginLeft: 15, fontSize: 14 }}
                             placeholder="First Name"
                             autoFocus={true}
@@ -75,16 +83,43 @@ export default function SignUpScreen({ navigation }) {
                             value={formData.firstName}
                         />
                         <InputField
-                            containerStyle={{ flex: 1, marginBottom: 20, marginLeft: 8, backgroundColor: "white" }}
+                            containerStyle={{ flex: 1, marginBottom: 12, marginLeft: 8, backgroundColor: "white" }}
                             inputStyle={{ marginLeft: 15, fontSize: 14 }}
                             placeholder="Last Name"
                             onChangeText={(text) => setFormData({ ...formData, lastName: text })}
                             value={formData.lastName}
                         />
                     </View>
-                    
+                    <DropDownPicker
+                        open={isDistrictOpen}
+                        setOpen={() => setIsDistrictOpen(!isDistrictOpen)}
+                        
+                        value={formData.district}
+                        setValue={valueFunction => setFormData({ ...formData, district: valueFunction() })}
+                        
+                        placeholder="District"
+                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
+                        items={arrayOfDistrictObjects}
+                        schema={{ label: "content", value: "content" }}
+                    />
+                    <DropDownPicker
+                        open={isGenderOpen}
+                        setOpen={() => setIsGenderOpen(!isGenderOpen)}
+                        
+                        value={formData.gender}
+                        setValue={valueFunction => setFormData({ ...formData, gender: valueFunction() })}
+                        
+                        placeholder="Gender"
+                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
+                        items={[
+                            { content: "Male", id: 0 },
+                            { content: "Female", id: 1 }, 
+                            { content: "Prefer not to say", id: 2 }
+                        ]}
+                        schema={{ label: "content", value: "content" }}
+                    />
                     <InputField
-                        containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
+                        containerStyle={{ marginBottom: 12, backgroundColor: "white" }}
                         inputStyle={{ fontSize: 14 }}
                         placeholder="Email"
                         leftIcon="email"
@@ -95,7 +130,7 @@ export default function SignUpScreen({ navigation }) {
                         value={formData.email}
                     />
                     <InputField
-                        containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
+                        containerStyle={{ marginBottom: 12, backgroundColor: "white" }}
                         inputStyle={{ fontSize: 14 }}
                         placeholder="Password"
                         leftIcon="lock"
@@ -130,7 +165,7 @@ export default function SignUpScreen({ navigation }) {
                 <View>
                     <Button 
                         title="Sign Up"
-                        containerStyle={{ marginBottom: 10 }}
+                        containerStyle={{ marginBottom: 12 }}
                         onPress={handleSignUp}    
                     />
                     <RNButton 
