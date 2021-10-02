@@ -91,6 +91,23 @@ export default function SignUpScreen({ navigation }) {
                         />
                     </View>
                     <DropDownPicker
+                        open={isGenderOpen}
+                        setOpen={() => setIsGenderOpen(!isGenderOpen)}
+                        
+                        value={formData.gender}
+                        setValue={valueFunction => setFormData({ ...formData, gender: valueFunction() })}
+                        
+                        placeholder="Gender"
+                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
+                        containerStyle={{zIndex: 9999}}
+                        items={[
+                            { content: "Male", id: 0 },
+                            { content: "Female", id: 1 }, 
+                            { content: "Prefer not to say", id: 2 }
+                        ]}
+                        schema={{ label: "content", value: "content" }}
+                    />
+                    <DropDownPicker
                         open={isDistrictOpen}
                         setOpen={() => setIsDistrictOpen(!isDistrictOpen)}
                         
@@ -100,22 +117,6 @@ export default function SignUpScreen({ navigation }) {
                         placeholder="District"
                         style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
                         items={arrayOfDistrictObjects}
-                        schema={{ label: "content", value: "content" }}
-                    />
-                    <DropDownPicker
-                        open={isGenderOpen}
-                        setOpen={() => setIsGenderOpen(!isGenderOpen)}
-                        
-                        value={formData.gender}
-                        setValue={valueFunction => setFormData({ ...formData, gender: valueFunction() })}
-                        
-                        placeholder="Gender"
-                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
-                        items={[
-                            { content: "Male", id: 0 },
-                            { content: "Female", id: 1 }, 
-                            { content: "Prefer not to say", id: 2 }
-                        ]}
                         schema={{ label: "content", value: "content" }}
                     />
                     <InputField
