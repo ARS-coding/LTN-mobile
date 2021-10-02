@@ -9,11 +9,11 @@ import {
     Keyboard } from "react-native";
 import { InputField, Button, ErrorMessage } from '../components';
 
-import { auth, firestore } from "../config/firebase";
+import { auth } from "../config/firebase";
 import { setUserDocument, removeOneProp } from "../utils/helpers";
 
 import { arrayOfDistrictObjects } from "../utils/constants";
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Picker } from '@react-native-picker/picker';
 
 export default function SignUpScreen({ navigation }) {
     const initialFormData = {
@@ -76,7 +76,7 @@ export default function SignUpScreen({ navigation }) {
                     <View style={{flexDirection: "row"}}>
                         <InputField
                             containerStyle={{ flex: 1, marginBottom: 12, backgroundColor: "white" }}
-                            inputStyle={{ marginLeft: 15, fontSize: 14 }}
+                            inputStyle={{ marginLeft: 8, fontSize: 14 }}
                             placeholder="First Name"
                             autoFocus={true}
                             onChangeText={(text) => setFormData({ ...formData, firstName: text })}
@@ -84,41 +84,40 @@ export default function SignUpScreen({ navigation }) {
                         />
                         <InputField
                             containerStyle={{ flex: 1, marginBottom: 12, marginLeft: 8, backgroundColor: "white" }}
-                            inputStyle={{ marginLeft: 15, fontSize: 14 }}
+                            inputStyle={{ marginLeft: 8, fontSize: 14 }}
                             placeholder="Last Name"
                             onChangeText={(text) => setFormData({ ...formData, lastName: text })}
                             value={formData.lastName}
                         />
                     </View>
-                    <DropDownPicker
-                        open={isGenderOpen}
-                        setOpen={() => setIsGenderOpen(!isGenderOpen)}
-                        
-                        value={formData.gender}
-                        setValue={valueFunction => setFormData({ ...formData, gender: valueFunction() })}
-                        
-                        placeholder="Gender"
-                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
-                        containerStyle={{zIndex: 9999}}
-                        items={[
-                            { content: "Male", id: 0 },
-                            { content: "Female", id: 1 }, 
-                            { content: "Prefer not to say", id: 2 }
-                        ]}
-                        schema={{ label: "content", value: "content" }}
-                    />
-                    <DropDownPicker
-                        open={isDistrictOpen}
-                        setOpen={() => setIsDistrictOpen(!isDistrictOpen)}
-                        
-                        value={formData.district}
-                        setValue={valueFunction => setFormData({ ...formData, district: valueFunction() })}
-                        
-                        placeholder="District"
-                        style={{ borderWidth: 2, borderRadius: 4, marginBottom: 12, paddingLeft: 15, height: 56 }}
-                        items={arrayOfDistrictObjects}
-                        schema={{ label: "content", value: "content" }}
-                    />
+                    <View style={{borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                        <Picker 
+                            selectedValue={formData.gender} 
+                            onValueChange={gender => setFormData({ ...formData, gender: gender })}
+                            style={{backgroundColor: "white", flex: 1, paddingLeft: 30 }}
+                        >
+                            <Picker.Item style={{ fontSize: 14 }} label="Male" value="Male" />
+                            <Picker.Item style={{ fontSize: 14 }} label="Female" value="Female" />
+                            <Picker.Item style={{ fontSize: 14 }} label="Prefer not to say" value="Prefer not to say" />
+                        </Picker>
+                    </View>
+                    <View style={{borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                        <Picker 
+                            selectedValue={formData.district} 
+                            onValueChange={district => setFormData({ ...formData, district: district })}
+                            style={{backgroundColor: "white", flex: 1, paddingLeft: 30 }}
+                        >
+                            {arrayOfDistrictObjects.map(districtObject => {
+                                return (
+                                    <Picker.Item
+                                        style={{fontSize: 14}} 
+                                        label={districtObject.content}
+                                        value={districtObject.content}
+                                    />
+                                )
+                            })}
+                        </Picker>
+                    </View>
                     <InputField
                         containerStyle={{ marginBottom: 12, backgroundColor: "white" }}
                         inputStyle={{ fontSize: 14 }}
