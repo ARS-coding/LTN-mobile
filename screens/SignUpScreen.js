@@ -115,7 +115,7 @@ export default function SignUpScreen({ navigation }) {
                         <Picker 
                             selectedValue={formData.district} 
                             onValueChange={district => setFormData({ ...formData, district: district })}
-                            style={{backgroundColor: "white", flex: 1 }}
+                            style={{ flex: 1 }}
                         >
                             <Picker.Item 
                                 style={{ fontSize: 14 }} 
