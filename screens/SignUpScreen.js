@@ -51,9 +51,15 @@ export default function SignUpScreen({ navigation }) {
     }
 
     async function handleSignUp() {
-        if(formData.firstName && formData.lastName && (formData.password === formData.passwordConfirmation)) {
+        if(
+            formData.firstName &&
+            formData.lastName &&
+            formData.gender &&
+            formData.district &&
+            (formData.password === formData.passwordConfirmation)
+        ) {
             try {
-                const { uid, additionalUserInfo: { isNewUser } } = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
+                const { uid } = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
                 setUserDocument(uid, removeOneProp(formData, "passwordConfirmation"));
                 setFormData(initialFormData);
             } catch(error) {
@@ -94,8 +100,13 @@ export default function SignUpScreen({ navigation }) {
                         <Picker 
                             selectedValue={formData.gender} 
                             onValueChange={gender => setFormData({ ...formData, gender: gender })}
-                            style={{backgroundColor: "white", flex: 1, paddingLeft: 30 }}
+                            style={{backgroundColor: "white", flex: 1 }}
                         >
+                            <Picker.Item 
+                                style={{ fontSize: 14 }}
+                                label="Gender" 
+                                value={null}
+                            />
                             <Picker.Item style={{ fontSize: 14 }} label="Male" value="Male" />
                             <Picker.Item style={{ fontSize: 14 }} label="Female" value="Female" />
                             <Picker.Item style={{ fontSize: 14 }} label="Prefer not to say" value="Prefer not to say" />
@@ -105,11 +116,17 @@ export default function SignUpScreen({ navigation }) {
                         <Picker 
                             selectedValue={formData.district} 
                             onValueChange={district => setFormData({ ...formData, district: district })}
-                            style={{backgroundColor: "white", flex: 1, paddingLeft: 30 }}
+                            style={{backgroundColor: "white", flex: 1 }}
                         >
-                            {arrayOfDistrictObjects.map(districtObject => {
+                            <Picker.Item 
+                                style={{ fontSize: 14 }} 
+                                label="District"
+                                value={null}
+                            />
+                            {arrayOfDistrictObjects.map((districtObject) => {
                                 return (
                                     <Picker.Item
+                                        key={districtObject.id}
                                         style={{fontSize: 14}} 
                                         label={districtObject.content}
                                         value={districtObject.content}

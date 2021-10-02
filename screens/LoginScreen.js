@@ -45,7 +45,7 @@ export default function LoginScreen({ navigation }) {
             <View style={styles.container}>
                 <Text style={styles.title}>Login</Text>
                 <InputField 
-                    containerStyle={{ marginVertical: 20, backgroundColor: "white" }}
+                    containerStyle={{ marginTop: 20, marginBottom: 12, backgroundColor: "white" }}
                     inputStyle={{ fontSize: 14 }}
                     leftIcon="email"
                     placeholder="Email"
