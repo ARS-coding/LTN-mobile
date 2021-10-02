@@ -40,7 +40,6 @@ export default function SignUpScreen({ navigation }) {
         }
     });
     const [signUpError, setSignUpError] = useState("");
-    console.log(formData)
     
     function handlePasswordVisibility(targetInput) {
         if (passwordInputs[targetInput].icon === "eye") {
@@ -96,11 +95,11 @@ export default function SignUpScreen({ navigation }) {
                             value={formData.lastName}
                         />
                     </View>
-                    <View style={{borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                    <View style={{ backgroundColor: "white", borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
                         <Picker 
                             selectedValue={formData.gender} 
                             onValueChange={gender => setFormData({ ...formData, gender: gender })}
-                            style={{backgroundColor: "white", flex: 1 }}
+                            style={{ flex: 1 }}
                         >
                             <Picker.Item 
                                 style={{ fontSize: 14 }}
@@ -112,7 +111,7 @@ export default function SignUpScreen({ navigation }) {
                             <Picker.Item style={{ fontSize: 14 }} label="Prefer not to say" value="Prefer not to say" />
                         </Picker>
                     </View>
-                    <View style={{borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                    <View style={{ backgroundColor: "white", borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
                         <Picker 
                             selectedValue={formData.district} 
                             onValueChange={district => setFormData({ ...formData, district: district })}
