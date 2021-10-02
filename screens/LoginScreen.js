@@ -18,18 +18,17 @@ export default function LoginScreen({ navigation }) {
         password: "",
     };
     const [formData, setFormdata] = useState(initialFormData);
-    const [passwordVisibility, setPasswordVisibility] = useState(false);
-    const [rightIcon, setRightIcon] = useState("eye");
+    const [passwordInput , setPasswordInput] = useState({ icon: "eye", isNotVisible: true })
     const [loginError, setLoginError] = useState("");
 
-    function handlePasswordVisibility() {
-        if (rightIcon === "eye") {
-            setRightIcon("eye-off");
-            setFormdata(initialFormData);
-        } else if (rightIcon === "eye-off") {
-            setRightIcon("eye");
+    async function handlePasswordVisibility() {
+        if (passwordInput.icon === "eye") {
+            console.log("Helloooo")
+            await setPasswordInput({ icon: "eye-off", isNotVisible: true });
+            console.log(passwordInput)
+        } else if (passwordInput.icon === "eye-off") {
+            setPasswordInput({ icon: "eye", isNotVisible: false });
         }
-        setPasswordVisibility(!passwordVisibility);
     }
 
     async function onLogin() {
@@ -61,13 +60,12 @@ export default function LoginScreen({ navigation }) {
                     containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
                     inputStyle={{ fontSize: 14 }}
                     leftIcon='lock'
-                    rightIcon={rightIcon}
+                    rightIcon={passwordInput.icon}
                     placeholder="Password"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    secureTextEntry={passwordVisibility}
+                    secureTextEntry={passwordInput.isNotVisible}
                     rightIconOnPress={handlePasswordVisibility}
-                    handlePasswordVisibility={passwordVisibility}
 
                     onChangeText={(text) => setFormdata({ ...formData, password: text })}
                     value={formData.password}
