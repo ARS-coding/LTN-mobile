@@ -18,14 +18,12 @@ export default function LoginScreen({ navigation }) {
         password: "",
     };
     const [formData, setFormdata] = useState(initialFormData);
-    const [passwordInput , setPasswordInput] = useState({ icon: "eye", isNotVisible: true })
+    const [passwordInput , setPasswordInput] = useState({ icon: "eye-off", isNotVisible: true })
     const [loginError, setLoginError] = useState("");
 
     async function handlePasswordVisibility() {
         if (passwordInput.icon === "eye") {
-            console.log("Helloooo")
             await setPasswordInput({ icon: "eye-off", isNotVisible: true });
-            console.log(passwordInput)
         } else if (passwordInput.icon === "eye-off") {
             setPasswordInput({ icon: "eye", isNotVisible: false });
         }
