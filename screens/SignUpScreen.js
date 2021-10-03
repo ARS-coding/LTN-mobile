@@ -27,8 +27,6 @@ export default function SignUpScreen({ navigation }) {
     };
     
     const [formData, setFormData] = useState(initialFormData);
-    const [isDistrictOpen, setIsDistrictOpen] = useState(false);
-    const [isGenderOpen, setIsGenderOpen] = useState(false);
     const [passwordInputs, setPasswordInputs] = useState({
         passwordInput: {
             icon: "eye-off",
@@ -49,7 +47,7 @@ export default function SignUpScreen({ navigation }) {
         }
     }
 
-    async function handleSignUp() {
+    function handleSignUp() {
         if(
             formData.firstName &&
             formData.lastName &&
@@ -57,13 +55,9 @@ export default function SignUpScreen({ navigation }) {
             formData.district &&
             (formData.password === formData.passwordConfirmation)
         ) {
-            try {
-                const { uid } = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
-                setUserDocument(uid, removeOneProp(formData, "passwordConfirmation"));
-                setFormData(initialFormData);
-            } catch(error) {
-                setSignUpError(error.message);
-            }
+                auth.createUserWithEmailAndPassword(formData.email, formData.password)
+                .then((authCred) => setUserDocument(authCred.user.uid, removeOneProp(formData, "passwordConfirmation")))
+                .catch(error => setSignUpError(error.message))
         }
     }
 
@@ -95,7 +89,7 @@ export default function SignUpScreen({ navigation }) {
                             value={formData.lastName}
                         />
                     </View>
-                    <View style={{ backgroundColor: "white", borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                    <View style={styles.picker}>
                         <Picker 
                             selectedValue={formData.gender} 
                             onValueChange={gender => setFormData({ ...formData, gender: gender })}
@@ -111,7 +105,7 @@ export default function SignUpScreen({ navigation }) {
                             <Picker.Item style={{ fontSize: 14 }} label="Prefer not to say" value="Prefer not to say" />
                         </Picker>
                     </View>
-                    <View style={{ backgroundColor: "white", borderRadius: 4, borderWidth: 2 , height: 58, marginBottom: 12 }}>
+                    <View style={styles.picker}>
                         <Picker 
                             selectedValue={formData.district} 
                             onValueChange={district => setFormData({ ...formData, district: district })}
@@ -206,5 +200,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "700",
         color: "white",
+    },
+    picker: {
+        backgroundColor: "white",
+        borderRadius: 4,
+        borderWidth: 2 ,
+        height: 58,
+        marginBottom: 12 
     }
 })
