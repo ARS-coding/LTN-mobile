@@ -1,4 +1,4 @@
-# Love Thy Neighbour
+# Love Thy Neighbor
 
 Love Thy Neighbour is a portal to enable people to meet and befriend each other, based on their location. It's going to help people have stronger and more diverse personal connections.
 
