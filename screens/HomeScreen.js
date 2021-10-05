@@ -1,9 +1,15 @@
 import React from 'react'
 
-import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
+import {
+    StyleSheet,
+    View,
+    ScrollView,
+    Text,
+    Image
+} from "react-native";
 
 import { connect } from 'react-redux';
-import { firestore } from '../config/firebase';
+// import { firestore } from '../config/firebase'; // whenever they get into the editing mode, show inputs and let them submit the changes that they have done to their profile data
 
 import PPMaleSVG from "../assets/PPMaleSVG.jsx"
 import PPFemaleSVG from "../assets/PPFemaleSVG.jsx"
@@ -33,7 +39,7 @@ function HomeScreen({ firestoreDoc }) {
     };
 
     return (
-        <View style={[ styles.container, {backgroundColor: "#e93b81"} ]}>
+        <ScrollView style={styles.container}>
             <View style={styles.pictureAndName}>
                 { !imageUrl && gender !== "Prefer not to say" 
                   ?
@@ -56,41 +62,51 @@ function HomeScreen({ firestoreDoc }) {
                     <Text style={styles.name}>{lastName}</Text>
                 </View>
             </View>
-            <View style={[styles.otherData]}>
+            <View style={{ flex: 1 }}>
                 <View style={styles.genderAndAge}>
-                    <View style={{height: 70, flexBasis: "40%"}}>
-                        <Text style={[styles.title, { color: "black" }]}>Gender:</Text>
-                        <Text style={{ color: "white" }}>{gender}</Text>
+                    <View style={[styles.dataField, {flexBasis: "37%", marginRight: "3%"}]}>
+                        <Text style={styles.title}>Gender:</Text>
+                        <Text style={styles.dataText}>{gender}</Text>
                     </View>
-                    <View style={{height: 70, flexBasis: "60%"}}>
-                        <Text style={[styles.title, { color: "black" }]}>Age:</Text>
-                        <Text style={{ color: "white" }}>{!firestoreDoc.age ? "Age yet to be added" : firestoreDoc.age}</Text>
+                    <View style={[styles.dataField, {flexBasis: "60%"}]}>
+                        <Text style={styles.title}>Age:</Text>
+                        <Text style={styles.dataText}>{!
+                            firestoreDoc.age ? "Age yet to be added" : firestoreDoc.age}
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.districtAndEducation}>
-                    <View style={{height: 70, flexBasis: "40%"}}>
-                        <Text style={[styles.title, { color: "black" }]}>District:</Text>
-                        <Text style={{ color: "white" }}>{district}</Text>
+                    <View style={[styles.dataField, {flexBasis: "37%", marginRight: "3%"}]}>
+                        <Text style={styles.title}>District:</Text>
+                        <Text style={styles.dataText}>{district}</Text>
                     </View>
-                    <View style={{height: 70, flexBasis: "60%"}}>
-                        <Text style={[styles.title, { color: "black" }]}>Education:</Text>
-                        <Text style={{ color: "white" }}>{!firestoreDoc.education ? "Education yet to be added" : firestoreDoc.education}</Text>
+                    <View style={[styles.dataField, {flexBasis: "60%"}]}>
+                        <Text style={styles.title}>Education:</Text>
+                        <Text style={styles.dataText}>
+                            {!firestoreDoc.education ? "Education yet to be added" : firestoreDoc.education}
+                        </Text>
                     </View>
                 </View>
-                <View style={{height: 70}}>
-                    <Text style={[styles.title, { color: "black" }]}>Bio:</Text>
-                    <Text style={{ color: "white" }}>{!firestoreDoc.bio ? "Bio yet to be added" : firestoreDoc.bio}</Text>
+                <View style={styles.dataField}>
+                    <Text style={styles.title}>Bio:</Text>
+                    <Text style={styles.dataText}>
+                        {!firestoreDoc.bio ? "Bio yet to be added" : firestoreDoc.bio}
+                    </Text>
                 </View>
-                <View style={{height: 70}}>
-                    <Text style={[styles.title, { color: "black" }]}>Number:</Text>
-                    <Text style={{ color: "white" }}>{!firestoreDoc.number ? "Number yet to be added" : firestoreDoc.number}</Text>
+                <View style={styles.dataField}>
+                    <Text style={styles.title}>Number:</Text>
+                    <Text style={styles.dataText}>
+                        {!firestoreDoc.number ? "Number yet to be added" : firestoreDoc.number}
+                    </Text>
                 </View>
-                <View style={{height: 70}}>
-                    <Text style={[styles.title, { color: "black" }]}>Address:</Text>
-                    <Text style={{ color: "white" }}>{!firestoreDoc.address ? "Address yet to be added" : firestoreDoc.address}</Text>
+                <View style={styles.dataField}>
+                    <Text style={styles.title}>Address:</Text>
+                    <Text style={styles.dataText}>
+                        {!firestoreDoc.address ? "Address yet to be added" : firestoreDoc.address}
+                    </Text>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -99,11 +115,12 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 15,
         paddingHorizontal: 12,
+        backgroundColor: "#e93b81"
     },
     pictureAndName: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 24
+        marginBottom: 24,
     },
     picture: {
         height: 100,
@@ -114,9 +131,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: "white",
         marginLeft: 20
-    },
-    otherData: {
-        flex: 1,
     },
     genderAndAge: {
         flexDirection: "row",
@@ -129,7 +143,15 @@ const styles = StyleSheet.create({
     title: {
         marginBottom: 10,
         fontWeight: "bold",
-        fontSize: 17
+        fontSize: 17,
+        color: "black"
+    },
+    dataField: {
+        height: 70
+    },
+    dataText: {
+        color: "white",
+        fontSize: 13.5
     }
 })
 
