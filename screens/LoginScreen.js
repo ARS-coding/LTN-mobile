@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {
     StyleSheet,
     View,
+    ScrollView,
     Text,
     Button as RNButton,
     TouchableWithoutFeedback,
@@ -39,50 +40,52 @@ export default function LoginScreen({ navigation }) {
 
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={styles.container}>
-                <Text style={styles.title}>Login</Text>
-                <InputField 
-                    containerStyle={{ marginTop: 20, marginBottom: 12, backgroundColor: "white" }}
-                    inputStyle={{ fontSize: 14 }}
-                    leftIcon="email"
-                    placeholder="Email"
-                    autoCapitalize="none"
-                    keyboardType="email-address"
-                    autoFocus={true}
+        <ScrollView style={styles.container}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <>
+                    <Text style={styles.title}>Login</Text>
+                    <InputField 
+                        containerStyle={{ marginTop: 20, marginBottom: 12, backgroundColor: "white" }}
+                        inputStyle={{ fontSize: 14 }}
+                        leftIcon="email"
+                        placeholder="Email"
+                        autoCapitalize="none"
+                        keyboardType="email-address"
+                        autoFocus={true}
 
-                    onChangeText={(text) => setFormdata({ ...formData, email: text })}
-                    value={formData.email}
-                />
-                <InputField 
-                    containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
-                    inputStyle={{ fontSize: 14 }}
-                    leftIcon='lock'
-                    rightIcon={passwordInput.icon}
-                    placeholder="Password"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    secureTextEntry={passwordInput.isNotVisible}
-                    rightIconOnPress={handlePasswordVisibility}
+                        onChangeText={(text) => setFormdata({ ...formData, email: text })}
+                        value={formData.email}
+                    />
+                    <InputField 
+                        containerStyle={{ marginBottom: 20, backgroundColor: "white" }}
+                        inputStyle={{ fontSize: 14 }}
+                        leftIcon='lock'
+                        rightIcon={passwordInput.icon}
+                        placeholder="Password"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        secureTextEntry={passwordInput.isNotVisible}
+                        rightIconOnPress={handlePasswordVisibility}
 
-                    onChangeText={(text) => setFormdata({ ...formData, password: text })}
-                    value={formData.password}
-                />
-                {(loginError !== "") && <ErrorMessage
-                    error={loginError}
-                    visible={true}
-                />}
-                <Button 
-                    title="Login"
-                    onPress={() => { setLoginError(""); onLogin()}}
-                    containerStyle={{ marginBottom: 10 }}
-                />
-                <RNButton 
-                    title="Go to Sign Up"
-                    onPress={() => navigation.navigate('SignUp')}
-                /> 
-            </View>
-        </TouchableWithoutFeedback>
+                        onChangeText={(text) => setFormdata({ ...formData, password: text })}
+                        value={formData.password}
+                    />
+                    {(loginError !== "") && <ErrorMessage
+                        error={loginError}
+                        visible={true}
+                    />}
+                    <Button 
+                        title="Login"
+                        onPress={() => { setLoginError(""); onLogin()}}
+                        containerStyle={{ marginBottom: 10 }}
+                    />
+                    <RNButton 
+                        title="Go to Sign Up"
+                        onPress={() => navigation.navigate('SignUp')}
+                    /> 
+                </>
+            </TouchableWithoutFeedback>
+        </ScrollView>
     )
 }
 
