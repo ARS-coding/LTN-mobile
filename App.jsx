@@ -5,7 +5,7 @@ import { useDispatch, Provider } from 'react-redux';
 import { listenForAuthChanges } from './redux/slices/userSlice';
 import { store } from "./redux/store";
 
-// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet,
   KeyboardAvoidingView,
@@ -47,7 +47,7 @@ function App() {
     >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <>
-          {/* <StatusBar /> */}
+          <StatusBar />
           <Routes />  
         </>
       </TouchableWithoutFeedback>
@@ -58,6 +58,6 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: statusBarHeight,
+    marginTop: statusBarHeight,
   },
 });
