@@ -16,13 +16,13 @@ function HomeScreen({ firestoreDoc }) {
         gender,
         district,
         email,
-        imageUrl // TODO: Add a form for users to be able to change this
+        imageUrl // TODO: Add a form for users to be able to change their images
     } = firestoreDoc;
     
     function getDefaultGenderImage(gender) {
         switch (gender) {
           case "Prefer not to say":
-            return "../assets/PPGenderless.png";
+            return require("../assets/PPGenderless.png");
           case "Male":
             return <PPMaleSVG />;
           case "Female":
@@ -39,8 +39,15 @@ function HomeScreen({ firestoreDoc }) {
                   ?
                   getDefaultGenderImage(gender)
                   :
+                  !imageUrl && gender === "Prefer not to say"
+                  ?
                   <Image
-                    source={require("../assets/PPGenderless.png")}
+                    source={getDefaultGenderImage(gender)}
+                    style={styles.picture}
+                   />
+                   :
+                   <Image
+                    source={{ uri: imageUrl }}
                     style={styles.picture}
                    />
                 }
