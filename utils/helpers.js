@@ -1,9 +1,5 @@
 import { firestore } from "../config/firebase";
 
-import PPMaleSVG from "../assets/PPMaleSVG.svg";
-import PPFemaleSVG from "../assets/PPFemaleSVG.svg";
-import PPGenderless from "../assets/PPGenderless.png";
-
 export function removeOneProp(object, propToBeRemoved) {
   const copyObj = { ...object };
   delete copyObj[propToBeRemoved];
@@ -24,17 +20,4 @@ export function createInterestString(interests) {
     interestsString += `${interestObj.content} | `;
   });
   return interestsString;
-};
-
-export function getDefaultGenderImage(gender) {
-  switch (gender) {
-    case "Prefer not to say":
-      return PPGenderless;
-    case "Male":
-      return PPMaleSVG;
-    case "Female":
-      return PPFemaleSVG;
-    default:
-      return undefined;
-  }
 };
