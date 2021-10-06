@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import PPMaleSVG from "../assets/PPMaleSVG.jsx"
 import PPFemaleSVG from "../assets/PPFemaleSVG.jsx"
 
-function HomeScreen({ firestoreDoc }) {
+function ProfileScreen({ firestoreDoc }) {
 
     const { 
         firstName,
@@ -157,4 +157,4 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({firestoreDoc}) => ({ firestoreDoc }); 
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps)(ProfileScreen);
