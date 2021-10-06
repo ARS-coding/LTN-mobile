@@ -55,9 +55,9 @@ export default function SignUpScreen({ navigation }) {
             formData.district &&
             (formData.password === formData.passwordConfirmation)
         ) {
-                auth.createUserWithEmailAndPassword(formData.email, formData.password)
-                .then((authCred) => setUserDocument(authCred.user.uid, removeOneProp(formData, "passwordConfirmation")))
-                .catch(error => setSignUpError(error.message))
+            auth.createUserWithEmailAndPassword(formData.email, formData.password)
+            .then((authCred) => setUserDocument(authCred.user.uid, removeOneProp(formData, "passwordConfirmation")))
+            .catch(error => setSignUpError(error.message))
         }
     }
 
