@@ -7,8 +7,8 @@ import { AntDesign } from "@expo/vector-icons";
 export default function IconButton({ color, size, onPress, name }) {
     return (
         <Pressable
-            style={args => {
-                if (args.pressed) {
+            style={({ pressed: isPressed }) => {
+                if (isPressed) {
                     return [styles.base, { opacity: .5 }]
                 };
                 return [styles.base, { opacity: 1 }];
