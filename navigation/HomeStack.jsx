@@ -5,7 +5,7 @@ import { IconButton } from "../components";
 import { auth } from "../config/firebase";
 
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 const { Navigator, Screen } = Stack;
