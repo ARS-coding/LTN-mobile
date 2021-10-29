@@ -53,7 +53,7 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "signedIn":
-      return { ...action.payload };
+      return { ...state, ...action.payload };
 
     case "notSignedIn":
       return { ...initialState };
