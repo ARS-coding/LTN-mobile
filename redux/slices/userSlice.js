@@ -38,10 +38,16 @@ export const listenForAuthChanges = () => {
   };
 };
 
+export const editProfile = () => ({ type: "editProfile" });
+export const saveProfileChanges = () => ({ type: "saveProfileChanges" });
+export const discardProfileChanges = () => ({ type: "discardProfileChanges" });
+
 const initialState = {
   isSignedIn: false,
   firestoreDoc: null,
   authCred: null,
+  isEditingProfile: false,
+  isProfileSaved: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -54,6 +60,23 @@ const userReducer = (state = initialState, action) => {
 
     case "getUpdatedUser":
       return { ...state, firestoreDoc: action.payload };
+
+    case "editProfile":
+      return { ...state, idEditingProfile: !state.isEditingProfile };
+
+    case "saveProfileChanges":
+      return {
+        ...state,
+        isProfileSaved: true,
+        idEditingProfile: !state.isEditingProfile,
+      };
+
+    case "discardProfileChanges":
+      return {
+        ...state,
+        isProfileSaved: false,
+        idEditingProfile: !state.isEditingProfile,
+      };
 
     default:
       return state;
