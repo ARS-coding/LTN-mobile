@@ -36,7 +36,7 @@ function HomeStack({
   return (
     <Navigator>
       <Screen
-        name="ProfileScreen"
+        name="Profile"
         component={ProfileScreen}
         options={{
           headerRight: () => (
